@@ -52,7 +52,6 @@ async def create_article(
     collection: AsyncCollection[ArticleMongoModel] = database["articles"]
 
     await collection.create_index("article_id", unique=True)
-    await collection.create_index("url", unique=True)
 
     # check if the article already exists
     if await collection.find_one({"article_id": payload.id}):
