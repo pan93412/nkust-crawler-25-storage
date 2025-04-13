@@ -44,8 +44,8 @@ class NewCommentDto(BaseModel):
     content: str
     created_at: datetime
     author: str
-    likes: int | None
-    reaction_type: Literal["+1", "-1", "0"] | None
+    likes: int | None = None
+    reaction_type: Literal["+1", "-1", "0"] | None = None
 
 
 class CommentMongoModel(TypedDict):
