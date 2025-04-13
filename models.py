@@ -45,7 +45,7 @@ class NewCommentDto(BaseModel):
     created_at: datetime
     author: str
     likes: int | None
-    mark: Literal["+1", "-1", "0"] | None
+    reaction_type: Literal["+1", "-1", "0"] | None
 
 
 class CommentMongoModel(TypedDict):
@@ -56,7 +56,7 @@ class CommentMongoModel(TypedDict):
     created_at: datetime
     author: str
     likes: int | None
-    mark: Literal["+1", "-1", "0"] | None
+    reaction_type: Literal["+1", "-1", "0"] | None
 
 
 class Comment(BaseModel):
@@ -66,7 +66,7 @@ class Comment(BaseModel):
     created_at: datetime
     author: str
     likes: int | None
-    mark: Literal["+1", "-1", "0"] | None
+    reaction_type: Literal["+1", "-1", "0"] | None
 
 
 def comment_mongo_model_to_comment(comment: CommentMongoModel, article_id: str) -> Comment:
@@ -77,7 +77,7 @@ def comment_mongo_model_to_comment(comment: CommentMongoModel, article_id: str) 
         created_at=comment["created_at"],
         author=comment["author"],
         likes=comment["likes"],
-        mark=comment["mark"],
+        reaction_type=comment["reaction_type"],
     )
 
 

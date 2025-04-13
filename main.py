@@ -107,7 +107,7 @@ async def create_comment(
             "created_at": payload.created_at,
             "author": payload.author,
             "likes": payload.likes,
-            "mark": payload.mark,
+            "reaction_type": payload.reaction_type,
         }
     )
 
