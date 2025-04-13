@@ -107,6 +107,7 @@ async def create_comment(
             "created_at": payload.created_at,
             "author": payload.author,
             "likes": payload.likes,
+            "dislikes": payload.dislikes,
             "reaction_type": payload.reaction_type,
         }
     )
@@ -166,6 +167,8 @@ async def create_reply(
             "created_at": payload.created_at,
             "author": payload.author,
             "likes": payload.likes,
+            "dislikes": payload.dislikes,
+            "reaction_type": payload.reaction_type,
         }
     )
 

@@ -45,6 +45,7 @@ class NewCommentDto(BaseModel):
     created_at: datetime
     author: str
     likes: int | None = None
+    dislikes: int | None = None
     reaction_type: Literal["+1", "-1", "0"] | None = None
 
 
@@ -56,6 +57,7 @@ class CommentMongoModel(TypedDict):
     created_at: datetime
     author: str
     likes: int | None
+    dislikes: int | None
     reaction_type: Literal["+1", "-1", "0"] | None
 
 
@@ -66,6 +68,7 @@ class Comment(BaseModel):
     created_at: datetime
     author: str
     likes: int | None
+    dislikes: int | None
     reaction_type: Literal["+1", "-1", "0"] | None
 
 
@@ -78,6 +81,7 @@ def comment_mongo_model_to_comment(comment: CommentMongoModel, article_id: str) 
         author=comment["author"],
         likes=comment["likes"],
         reaction_type=comment["reaction_type"],
+        dislikes=comment["dislikes"],
     )
 
 
@@ -86,7 +90,9 @@ class NewReplyDto(BaseModel):
     content: str
     created_at: datetime
     author: str
-    likes: int
+    likes: int | None = None
+    dislikes: int | None = None
+    reaction_type: Literal["+1", "-1", "0"] | None = None
 
 
 class ReplyMongoModel(TypedDict):
@@ -97,7 +103,9 @@ class ReplyMongoModel(TypedDict):
     content: str
     created_at: datetime
     author: str
-    likes: int
+    likes: int | None
+    dislikes: int | None
+    reaction_type: Literal["+1", "-1", "0"] | None
 
 
 class Reply(BaseModel):
@@ -107,7 +115,9 @@ class Reply(BaseModel):
     content: str
     created_at: datetime
     author: str
-    likes: int
+    likes: int | None
+    dislikes: int | None
+    reaction_type: Literal["+1", "-1", "0"] | None
 
 
 def reply_mongo_model_to_reply(reply: ReplyMongoModel, article_id: str, comment_id: str) -> Reply:
@@ -119,6 +129,8 @@ def reply_mongo_model_to_reply(reply: ReplyMongoModel, article_id: str, comment_
         created_at=reply["created_at"],
         author=reply["author"],
         likes=reply["likes"],
+        dislikes=reply["dislikes"],
+        reaction_type=reply["reaction_type"],
     )
 
 
