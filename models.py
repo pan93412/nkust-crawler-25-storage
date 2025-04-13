@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import NotRequired, TypedDict
+from typing import Literal, NotRequired, TypedDict
 from bson import ObjectId
 from pydantic import BaseModel
 
@@ -44,7 +44,8 @@ class NewCommentDto(BaseModel):
     content: str
     created_at: datetime
     author: str
-    likes: int
+    likes: int | None
+    mark: Literal["+1", "-1", "0"] | None
 
 
 class CommentMongoModel(TypedDict):
@@ -54,7 +55,8 @@ class CommentMongoModel(TypedDict):
     content: str
     created_at: datetime
     author: str
-    likes: int
+    likes: int | None
+    mark: Literal["+1", "-1", "0"] | None
 
 
 class Comment(BaseModel):
@@ -63,7 +65,8 @@ class Comment(BaseModel):
     content: str
     created_at: datetime
     author: str
-    likes: int
+    likes: int | None
+    mark: Literal["+1", "-1", "0"] | None
 
 
 def comment_mongo_model_to_comment(comment: CommentMongoModel, article_id: str) -> Comment:
@@ -74,6 +77,7 @@ def comment_mongo_model_to_comment(comment: CommentMongoModel, article_id: str) 
         created_at=comment["created_at"],
         author=comment["author"],
         likes=comment["likes"],
+        mark=comment["mark"],
     )
 
 
